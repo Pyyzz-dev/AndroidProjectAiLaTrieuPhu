@@ -52,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
     private void connectToDatabase() {
         helperGame = new GamingDatabaseHelper(MainActivity.this);
         helperScore = new ScoreDatabaseHelper(MainActivity.this);
-        removeOldDataFiles("Milionare.sqlite");
-        removeOldDataFiles("Milionare260718.sqlite");
-        removeOldDataFiles("Milionare1800.sqlite");
-        removeOldDataFiles("Milionare1801.sqlite");
-        removeOldDataFiles("Milionare1802.sqlite");
-        removeOldDataFiles("Milionare1803.sqlite");
-        removeOldDataFiles("Milionare1804.sqlite");
-        removeOldDataFiles("Milionare1805.sqlite");
-        removeOldDataFiles("Score.sqlite");
+//        removeOldDataFiles("Milionare.sqlite");
+//        removeOldDataFiles("Milionare260718.sqlite");
+//        removeOldDataFiles("Milionare1800.sqlite");
+//        removeOldDataFiles("Milionare1801.sqlite");
+//        removeOldDataFiles("Milionare1802.sqlite");
+//        removeOldDataFiles("Milionare1803.sqlite");
+//        removeOldDataFiles("Milionare1804.sqlite");
+//        removeOldDataFiles("Milionare1805.sqlite");
+//        removeOldDataFiles("Score.sqlite");
         File databaseGame = getApplicationContext().getDatabasePath(GamingDatabaseHelper.DATABASE_NAME);
         if (!databaseGame.exists()) {
             helperGame.getReadableDatabase();
