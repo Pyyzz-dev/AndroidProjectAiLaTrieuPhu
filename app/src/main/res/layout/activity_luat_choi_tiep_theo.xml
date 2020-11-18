@@ -50,7 +50,6 @@
                     android:background="@null"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/support_1" />
-
                 <ImageButton
                     android:id="@+id/btnGoiDien"
                     android:layout_width="50dp"

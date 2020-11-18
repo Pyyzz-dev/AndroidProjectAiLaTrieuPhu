@@ -29,8 +29,6 @@ public class LuatChoiTiepTheoActivity extends AppCompatActivity {
     int page = 1;
     int thuTuCauHoi;
     EffectPlayer playerTheme, playerMC;
-    Timer timer;
-    Animation animation = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,18 +72,16 @@ public class LuatChoiTiepTheoActivity extends AppCompatActivity {
                     if (thuTuCauHoi == 5) btnTuVan.setVisibility(View.GONE);
                     else btnTuVan.setVisibility(View.VISIBLE);
                     playerMC.stopPlayer();
-                    if (timer != null) timer.cancel();
                     txtNoiDung.setText("Như vậy là bạn đã trả lời xong câu số " + thuTuCauHoi + " với mức tiền thưởng là " + tienThuong);
                 }
                 else if (page == 2) {
                     if (thuTuCauHoi == 5) btnTuVan.setVisibility(View.GONE);
                     else btnTuVan.setVisibility(View.VISIBLE);
                     playerMC.stopPlayer();
-                    if (timer != null) timer.cancel();
                     txtNoiDung.setText("Trả lời đúng câu số " + (thuTuCauHoi + 1) + ", mức tiền thưởng sẽ là " + tienThuongCauHoiTiep);
                 }
                 else if (page == 3) {
-                    if (timer != null) timer.cancel();
+
                     int tongTroGiup = 0;
                     for (Boolean x : dsTroGiup) if (x.booleanValue()) tongTroGiup++;
                     if (thuTuCauHoi == 5) btnTuVan.setVisibility(View.GONE);
@@ -98,32 +94,14 @@ public class LuatChoiTiepTheoActivity extends AppCompatActivity {
                     if (thuTuCauHoi == 5) btnTuVan.setVisibility(View.GONE);
                     else btnTuVan.setVisibility(View.VISIBLE);
                     playerMC.stopPlayer();
-                    if (timer != null) timer.cancel();
+
                     if (thuTuCauHoi == 5) {
                         playerMC.startPlayerAtOnce(R.raw.mc_voices_question_6);
-                        if (GameSetting.amThanhHieuUng) {
-                            animation = AnimationUtils.loadAnimation(LuatChoiTiepTheoActivity.this, R.anim.scale_button);
-                            timer = new Timer();
-                            timer.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            btnTuVan.setVisibility(View.VISIBLE);
-                                            btnTuVan.startAnimation(animation);
-                                            timer.cancel();
-                                        }
-                                    });
-                                }
-                            }, 2604, 6000);
-                        }
-                        else btnTuVan.setVisibility(View.VISIBLE);
+                        btnTuVan.setVisibility(View.VISIBLE);
                         txtNoiDung.setText("Và bắt đầu từ câu số 6, bạn sẽ có thêm một sự trợ giúp nữa, là tư vấn tại chỗ.");
                         page = 0;
                     }
                     else {
-                        if (timer != null) timer.cancel();
                         page = 1;
                         txtNoiDung.setText("Như vậy là bạn đã trả lời xong câu số " + thuTuCauHoi + " với mức tiền thưởng là " + tienThuong);
                     }
