@@ -5,17 +5,17 @@ public class NguoiChoi {
     private String ten;
     private double diem;
     private int thuTuCauHoi;
-    private String thoiGian;
+
 
     public NguoiChoi() {
     }
 
-    public NguoiChoi(int thuTu, String ten, double diem, int thuTuCauHoi, String thoiGian) {
+    public NguoiChoi(int thuTu, String ten, double diem, int thuTuCauHoi) {
         this.thuTu = thuTu;
         this.ten = ten;
         this.diem = diem;
         this.thuTuCauHoi = thuTuCauHoi;
-        this.thoiGian = thoiGian;
+
     }
 
     public int getThuTu() {
@@ -50,11 +50,4 @@ public class NguoiChoi {
         this.thuTuCauHoi = thuTuCauHoi;
     }
 
-    public String getThoiGian() {
-        return thoiGian;
-    }
-
-    public void setThoiGian(String thoiGian) {
-        this.thoiGian = thoiGian;
-    }
 }

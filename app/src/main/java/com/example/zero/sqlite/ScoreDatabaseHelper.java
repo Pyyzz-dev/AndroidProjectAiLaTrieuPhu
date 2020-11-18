@@ -42,10 +42,10 @@ public class ScoreDatabaseHelper extends SQLiteOpenHelper {
         if (database != null) database.close();
     }
 
-    public void insertDiem(String ten, double diem, int cauHoi, String thoiGian) {
+    public void insertDiem(String ten, double diem, int cauHoi ) {
         try {
             openDatabase();
-            database.execSQL("insert into DiemCao values (null, ?, ?, ?, ?)", new Object[] {ten, diem, cauHoi, thoiGian});
+            database.execSQL("insert into DiemCao values (null, ?, ?, ?, ?)", new Object[] {ten, diem, cauHoi, null});
             closeDatabase();
         }
         catch (Exception ex) {
@@ -64,7 +64,6 @@ public class ScoreDatabaseHelper extends SQLiteOpenHelper {
                 nguoiChoi.setTen(cursor.getString(1));
                 nguoiChoi.setDiem(cursor.getDouble(2));
                 nguoiChoi.setThuTuCauHoi(cursor.getInt(3));
-                nguoiChoi.setThoiGian(cursor.getString(4));
                 dsNguoiChoi.add(nguoiChoi);
             }
             cursor.close();

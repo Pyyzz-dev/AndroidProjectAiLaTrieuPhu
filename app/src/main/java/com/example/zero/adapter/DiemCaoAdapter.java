@@ -35,10 +35,9 @@ public class DiemCaoAdapter extends ArrayAdapter<NguoiChoi> {
         TextView txtTen = convertView.findViewById(R.id.txtTen);
         TextView txtDiem = convertView.findViewById(R.id.txtDiem);
         TextView txtCauHoi = convertView.findViewById(R.id.txtCauHoi);
-        TextView txtThoiGian = convertView.findViewById(R.id.txtThoiGian);
         NguoiChoi nguoiChoi = objects.get(position);
         txtThuTu.setText((position + 1) + "");
-        txtThoiGian.setText(nguoiChoi.getThoiGian());
+
         txtTen.setText("Họ và tên: " + nguoiChoi.getTen());
         txtDiem.setText("Điểm: " + nguoiChoi.getDiem());
         txtCauHoi.setText("Câu hỏi: " + nguoiChoi.getThuTuCauHoi());

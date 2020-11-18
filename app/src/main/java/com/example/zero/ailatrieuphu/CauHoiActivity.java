@@ -42,9 +42,7 @@ public class CauHoiActivity extends AppCompatActivity {
     SoundTrackPlayer playerTheme;
     EffectPlayer playerSoundEffect, playerEffect;
 
-    Calendar calendar;
-    Timer timerPlay;
-    SimpleDateFormat simpleDateFormat;
+
 
     GamingDatabaseHelper helperGame;
     ScoreDatabaseHelper helperScore;
@@ -72,47 +70,19 @@ public class CauHoiActivity extends AppCompatActivity {
         }
     }
 
-    private void startCounting() {
-        if (timerPlay == null) {
-            timerPlay = new Timer();
-            timerPlay.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            txtThoiGian.setText(simpleDateFormat.format(calendar.getTime()));
-                            calendar.add(Calendar.MILLISECOND, 20);
-                        }
-                    });
-                }
-            }, 0, 20);
-        }
-    }
 
-    private void stopCounting() {
-        if (timerPlay != null) {
-            timerPlay.cancel();
-            timerPlay = null;
-        }
-    }
+
 
     private void layDuLieuCu() {
-        calendar = Calendar.getInstance();
-        calendar.set(Calendar.AM_PM, Calendar.AM);
+
         Intent intent = getIntent();
         thuTuCauHoi = intent.getIntExtra("CAU_HOI", 0);
         if (thuTuCauHoi == 0) {
-            calendar.set(Calendar.HOUR, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
             btnTuVan.setVisibility(View.GONE);
             thuTuCauHoi++;
             playerTheme.startPlayerNonStop(R.raw.question_1_to_5);
             cauHoi = helperGame.getCauHoiDe();
             setCauHoi();
-            startCounting();
             return;
         }
         playSelectedThemeMusic();
@@ -174,8 +144,6 @@ public class CauHoiActivity extends AppCompatActivity {
             btnTuVan.setImageResource(R.drawable.support_4_used);
         }
 
-        calendar = (Calendar) intent.getSerializableExtra("CALENDAR");
-        startCounting();
     }
 
     private void setCauHoi() {
@@ -209,11 +177,11 @@ public class CauHoiActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int which) {
                             if (GameSetting.amThanhHieuUng) {
                                 selectedSupport = btn5050;
-                                stopCounting();
+
                                 playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.set_5050_voices, new MediaPlayer.OnCompletionListener() {
                                     @Override
                                     public void onCompletion(MediaPlayer mediaPlayer) {
-                                        startCounting();
+
                                         selectedSupport = null;
                                         playerSoundEffect.stopPlayer();
                                         playerEffect.startPlayerAtOnce(R.raw.set_5050);
@@ -261,7 +229,7 @@ public class CauHoiActivity extends AppCompatActivity {
                                     nguoiCanGoi = dsNguoiCanGoi[which];
                                     if (GameSetting.amThanhHieuUng) {
                                         selectedSupport = btnGoiDien;
-                                        stopCounting();
+
                                         playerTheme.stopPlayer();
                                         final ProgressDialog progressDialog = new ProgressDialog(CauHoiActivity.this);
                                         progressDialog.setTitle("Thông báo");
@@ -284,7 +252,7 @@ public class CauHoiActivity extends AppCompatActivity {
                                             @Override
                                             public void onCancel(DialogInterface dialogInterface) {
                                                 selectedSupport = null;
-                                                startCounting();
+
                                                 playerSoundEffect.stopPlayer();
                                                 playSelectedThemeMusic();
                                                 xuLyTroGiupGoiDien(nguoiCanGoi);
@@ -328,7 +296,7 @@ public class CauHoiActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             if (GameSetting.amThanhHieuUng) {
                                 selectedSupport = btnKhanGia;
-                                stopCounting();
+
                                 playerTheme.stopPlayer();
                                 final ProgressDialog progressDialog = new ProgressDialog(CauHoiActivity.this);
                                 progressDialog.setTitle("Thông báo");
@@ -351,7 +319,7 @@ public class CauHoiActivity extends AppCompatActivity {
                                     @Override
                                     public void onCancel(DialogInterface dialogInterface) {
                                         selectedSupport = null;
-                                        startCounting();
+
                                         playerSoundEffect.stopPlayer();
                                         playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.ask_the_audience_done, new MediaPlayer.OnCompletionListener() {
                                             @Override
@@ -396,11 +364,11 @@ public class CauHoiActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             if (GameSetting.amThanhHieuUng) {
                                 selectedSupport = btnTuVan;
-                                stopCounting();
+
                                 playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.consulting_voices, new MediaPlayer.OnCompletionListener() {
                                     @Override
                                     public void onCompletion(MediaPlayer mediaPlayer) {
-                                        startCounting();
+
                                         selectedSupport = null;
                                         playerSoundEffect.stopPlayer();
                                         xuLyTroGiupTuVan();
@@ -488,7 +456,7 @@ public class CauHoiActivity extends AppCompatActivity {
                     builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            stopCounting();
+
                             playerTheme.stopPlayer();
                             hideOptions();
                             Button btnDapAnDung = getButtonDapAnDung();
@@ -517,7 +485,7 @@ public class CauHoiActivity extends AppCompatActivity {
                             btnXacNhan.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    helperScore.insertDiem(txtHoTen.getText().toString(), diemThuong, thuTuCauHoi, simpleDateFormat.format(calendar.getTime()));
+                                    helperScore.insertDiem(txtHoTen.getText().toString(), diemThuong, thuTuCauHoi);
                                     Toast.makeText(CauHoiActivity.this, "Lưu điểm thành công.", Toast.LENGTH_LONG).show();
                                     dialog.cancel();
                                     finish();
@@ -752,7 +720,7 @@ public class CauHoiActivity extends AppCompatActivity {
                     hideAllSupports();
                     if (thuTuCauHoi < 5) {
                         selectedButton = null;
-                        stopCounting();
+
                         if (cauTraLoiDung) {
                             nhapNhayKhiTraLoiDung(button);
                             Toast.makeText(CauHoiActivity.this, cauTraLoi + " là câu trả lời đúng.\r\nBạn được " + helperGame.getDiem(thuTuCauHoi), Toast.LENGTH_SHORT).show();
@@ -767,7 +735,7 @@ public class CauHoiActivity extends AppCompatActivity {
                                     show3Supports();
                                     setCauHoi();
                                     btnDungCuocChoi.setVisibility(View.VISIBLE);
-                                    startCounting();
+
                                 }
                             });
                         }
@@ -777,7 +745,7 @@ public class CauHoiActivity extends AppCompatActivity {
                         }
                     }
                     else if (thuTuCauHoi == 5) {
-                        stopCounting();
+
                         playerTheme.stopPlayer();
                         selectedButton = null;
                         if (cauTraLoiDung) {
@@ -793,7 +761,7 @@ public class CauHoiActivity extends AppCompatActivity {
                         }
                     }
                     else if (thuTuCauHoi < 10) {
-                        stopCounting();
+
                         playerTheme.stopPlayer();
                         playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.question_6_to_10_final_answer, new MediaPlayer.OnCompletionListener() {
                             @Override
@@ -815,7 +783,7 @@ public class CauHoiActivity extends AppCompatActivity {
                         });
                     }
                     else if (thuTuCauHoi == 10) {
-                        stopCounting();
+
                         playerTheme.stopPlayer();
                         playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.question_6_to_10_final_answer, new MediaPlayer.OnCompletionListener() {
                             @Override
@@ -837,7 +805,7 @@ public class CauHoiActivity extends AppCompatActivity {
                         });
                     }
                     else if (thuTuCauHoi < 15) {
-                        stopCounting();
+
                         playerTheme.stopPlayer();
                         playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.question_11_to_14_final_answer, new MediaPlayer.OnCompletionListener() {
                             @Override
@@ -860,7 +828,7 @@ public class CauHoiActivity extends AppCompatActivity {
                     }
                     else if (thuTuCauHoi == 15) {
                         playerTheme.stopPlayer();
-                        stopCounting();
+
                         playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.question_15_final_answer, new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mediaPlayer) {
@@ -911,7 +879,7 @@ public class CauHoiActivity extends AppCompatActivity {
                             setCauHoi();
                         }
                         else if (thuTuCauHoi < 15) {
-                            stopCounting();
+
                             if (thuTuCauHoi == 5) btnTuVan.setVisibility(View.VISIBLE);
                             Toast.makeText(CauHoiActivity.this, cauTraLoi + " là câu trả lời đúng.\r\nBạn được " + helperGame.getDiem(thuTuCauHoi), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(CauHoiActivity.this, LuatChoiTiepTheoActivity.class);
@@ -927,14 +895,14 @@ public class CauHoiActivity extends AppCompatActivity {
                             setCauHoi();
                         }
                         else {
-                            stopCounting();
+
                             isKetThuc = true;
                             setCorrectOption(button);
                             xuLyThangCuoc();
                         }
                     }
                     else {
-                        stopCounting();
+
                         isKetThuc = true;
                         int mocCauHoi;
                         playerTheme.stopPlayer();
@@ -1035,7 +1003,7 @@ public class CauHoiActivity extends AppCompatActivity {
     }
 
     private void xuLyThuaCuocVoiNhac(int musicEffectResource, final int mocCauHoi) {
-        stopCounting();
+
         selectedButton = null;
         isKetThuc = true;
         final Button btnDapAnDung = getButtonDapAnDung();
@@ -1096,7 +1064,7 @@ public class CauHoiActivity extends AppCompatActivity {
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                helperScore.insertDiem(txtHoTen.getText().toString(), diemThuong, thuTuCauHoi, simpleDateFormat.format(calendar.getTime()));
+                helperScore.insertDiem(txtHoTen.getText().toString(), diemThuong, thuTuCauHoi);
                 Toast.makeText(CauHoiActivity.this, "Lưu điểm thành công.", Toast.LENGTH_LONG).show();
                 dialog.cancel();
                 finish();
@@ -1135,7 +1103,7 @@ public class CauHoiActivity extends AppCompatActivity {
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                helperScore.insertDiem(txtHoTen.getText().toString(), diemThuong, 15, simpleDateFormat.format(calendar.getTime()));
+                helperScore.insertDiem(txtHoTen.getText().toString(), diemThuong, 15);
                 Toast.makeText(CauHoiActivity.this, "Lưu điểm thành công.", Toast.LENGTH_LONG).show();
                 dialog.cancel();
                 finish();
@@ -1176,12 +1144,12 @@ public class CauHoiActivity extends AppCompatActivity {
         playerTheme = new SoundTrackPlayer(CauHoiActivity.this);
         playerSoundEffect = new EffectPlayer(CauHoiActivity.this);
         playerEffect = new EffectPlayer(CauHoiActivity.this);
-        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+
     }
 
     @Override
     protected void onPause() {
-        stopCounting();
+
         playerTheme.stopPlayer();
         playerEffect.stopPlayer();
         playerSoundEffect.pausePlayer();
@@ -1191,7 +1159,7 @@ public class CauHoiActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        startCounting();
+
         if (selectedSupport != btnGoiDien && selectedSupport != btnKhanGia) playSelectedThemeMusic();
         playerSoundEffect.continuePlayer();
     }
@@ -1206,12 +1174,12 @@ public class CauHoiActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        stopCounting();
+
     }
 
     @Override
     protected void onDestroy() {
-        stopCounting();
+
         if (selectedButton != null) {
             if (selectedButton.getText().toString().substring(3).equals(cauHoi.getCauTraLoi())) {
                 thuTuCauHoi++;
@@ -1289,11 +1257,6 @@ public class CauHoiActivity extends AppCompatActivity {
                 for (Integer x : helperGame.getCauHoiKhoDaLay()) chuoiCauHoi.append(x + " ");
             }
             editor.putString("CHUOI_CAU_HOI", chuoiCauHoi.toString().trim());
-            editor.putInt("HOUR", calendar.get(Calendar.HOUR));
-            editor.putInt("MINUTE", calendar.get(Calendar.MINUTE));
-            editor.putInt("SECOND", calendar.get(Calendar.SECOND));
-            editor.putInt("MILLISECOND", calendar.get(Calendar.MILLISECOND));
-            editor.putInt("AM_PM", calendar.get(Calendar.AM_PM));
             editor.commit();
         }
         super.onDestroy();
