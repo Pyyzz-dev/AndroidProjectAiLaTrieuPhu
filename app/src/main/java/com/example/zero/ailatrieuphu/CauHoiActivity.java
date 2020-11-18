@@ -1131,7 +1131,6 @@ public class CauHoiActivity extends AppCompatActivity {
         btnGoiDien = findViewById(R.id.btnGoiDien);
         btnKhanGia = findViewById(R.id.btnKhanGia);
         btnTuVan = findViewById(R.id.btnTuVan);
-        txtThoiGian = findViewById(R.id.txtThoiGian);
         txtCauHoi = findViewById(R.id.txtCauHoi);
         txtNoiDungCauHoi = findViewById(R.id.txtNoiDungCauHoi);
         btnDapAnA = findViewById(R.id.btnDapAnA);
