@@ -35,7 +35,18 @@ public class LuatChoiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_luat_choi);
-        addControls();
+        btn5050 = findViewById(R.id.btn5050);
+        btnGoiDien = findViewById(R.id.btnGoiDien);
+        btnKhanGia = findViewById(R.id.btnKhanGia);
+        txtCau05 = findViewById(R.id.txtCau05);
+        txtCau10 = findViewById(R.id.txtCau10);
+        txtCau15 = findViewById(R.id.txtCau15);
+        txtNoiDung = findViewById(R.id.txtNoiDung);
+        btnChuyenTiep = findViewById(R.id.btnChuyenTiep);
+        btnChoiLuon = findViewById(R.id.btnChoiLuon);
+        playerTheme = new SoundTrackPlayer(LuatChoiActivity.this);
+        playerVoices = new EffectPlayer(LuatChoiActivity.this);
+        playerMain = new EffectPlayer(LuatChoiActivity.this);
         addEvents();
         playerTheme.startPlayerNonStop(R.raw.explain_the_rules);
         setTextOnChatBox(1);
@@ -141,21 +152,6 @@ public class LuatChoiActivity extends AppCompatActivity {
                 builder.show();
             }
         });
-    }
-
-    private void addControls() {
-        btn5050 = findViewById(R.id.btn5050);
-        btnGoiDien = findViewById(R.id.btnGoiDien);
-        btnKhanGia = findViewById(R.id.btnKhanGia);
-        txtCau05 = findViewById(R.id.txtCau05);
-        txtCau10 = findViewById(R.id.txtCau10);
-        txtCau15 = findViewById(R.id.txtCau15);
-        txtNoiDung = findViewById(R.id.txtNoiDung);
-        btnChuyenTiep = findViewById(R.id.btnChuyenTiep);
-        btnChoiLuon = findViewById(R.id.btnChoiLuon);
-        playerTheme = new SoundTrackPlayer(LuatChoiActivity.this);
-        playerVoices = new EffectPlayer(LuatChoiActivity.this);
-        playerMain = new EffectPlayer(LuatChoiActivity.this);
     }
 
     @Override

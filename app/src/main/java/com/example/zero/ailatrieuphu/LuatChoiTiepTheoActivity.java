@@ -81,7 +81,6 @@ public class LuatChoiTiepTheoActivity extends AppCompatActivity {
                     txtNoiDung.setText("Trả lời đúng câu số " + (thuTuCauHoi + 1) + ", mức tiền thưởng sẽ là " + tienThuongCauHoiTiep);
                 }
                 else if (page == 3) {
-
                     int tongTroGiup = 0;
                     for (Boolean x : dsTroGiup) if (x.booleanValue()) tongTroGiup++;
                     if (thuTuCauHoi == 5) btnTuVan.setVisibility(View.GONE);
@@ -94,7 +93,6 @@ public class LuatChoiTiepTheoActivity extends AppCompatActivity {
                     if (thuTuCauHoi == 5) btnTuVan.setVisibility(View.GONE);
                     else btnTuVan.setVisibility(View.VISIBLE);
                     playerMC.stopPlayer();
-
                     if (thuTuCauHoi == 5) {
                         playerMC.startPlayerAtOnce(R.raw.mc_voices_question_6);
                         btnTuVan.setVisibility(View.VISIBLE);
@@ -115,7 +113,7 @@ public class LuatChoiTiepTheoActivity extends AppCompatActivity {
             }
         });
     }
-
+    // bắt đầu từ câu số 5 sẽ bắt đầu highlight các câu hỏi đi qua
     private void pointQuestion(int thuTuCauHoi) {
         switch (thuTuCauHoi) {
             case 5: txtCau05.setBackgroundResource(R.drawable.selected_option); break;

@@ -70,11 +70,7 @@ public class CauHoiActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     private void layDuLieuCu() {
-
         Intent intent = getIntent();
         thuTuCauHoi = intent.getIntExtra("CAU_HOI", 0);
         if (thuTuCauHoi == 0) {
@@ -146,6 +142,7 @@ public class CauHoiActivity extends AppCompatActivity {
 
     }
 
+    // in ra câu hỏi và toàn bộ đáp án lựa chọn
     private void setCauHoi() {
         setOriginalOption(btnDapAnA);
         setOriginalOption(btnDapAnB);
@@ -625,51 +622,9 @@ public class CauHoiActivity extends AppCompatActivity {
         if (!btnDapAnC.isEnabled()) cacDapAnSaiKoTheLay.add('C');
         if (!btnDapAnD.isEnabled()) cacDapAnSaiKoTheLay.add('D');
         String[] dsTuVan = new String[3];
-        if (thuTuCauHoi <= 5) {
-            dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-        }
-        else if (thuTuCauHoi <= 10) {
-            if (random.nextInt(100) < 90) dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-            if (random.nextInt(100) < 90) dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-            if (random.nextInt(100) < 90) dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-        }
-        else {
-            if (random.nextInt(100) < 70) dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-            if (random.nextInt(100) < 70) dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-            if (random.nextInt(100) < 70) dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-        }
+        dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
+        dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
+        dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
         AlertDialog.Builder dialogTuVan = new AlertDialog.Builder(CauHoiActivity.this);
         dialogTuVan.setTitle("Kết quả tư vấn");
         dialogTuVan.setItems(dsTuVan, null);
@@ -720,7 +675,6 @@ public class CauHoiActivity extends AppCompatActivity {
                     hideAllSupports();
                     if (thuTuCauHoi < 5) {
                         selectedButton = null;
-
                         if (cauTraLoiDung) {
                             nhapNhayKhiTraLoiDung(button);
                             Toast.makeText(CauHoiActivity.this, cauTraLoi + " là câu trả lời đúng.\r\nBạn được " + helperGame.getDiem(thuTuCauHoi), Toast.LENGTH_SHORT).show();
@@ -745,7 +699,6 @@ public class CauHoiActivity extends AppCompatActivity {
                         }
                     }
                     else if (thuTuCauHoi == 5) {
-
                         playerTheme.stopPlayer();
                         selectedButton = null;
                         if (cauTraLoiDung) {
@@ -761,7 +714,6 @@ public class CauHoiActivity extends AppCompatActivity {
                         }
                     }
                     else if (thuTuCauHoi < 10) {
-
                         playerTheme.stopPlayer();
                         playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.question_6_to_10_final_answer, new MediaPlayer.OnCompletionListener() {
                             @Override
@@ -783,7 +735,6 @@ public class CauHoiActivity extends AppCompatActivity {
                         });
                     }
                     else if (thuTuCauHoi == 10) {
-
                         playerTheme.stopPlayer();
                         playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.question_6_to_10_final_answer, new MediaPlayer.OnCompletionListener() {
                             @Override
