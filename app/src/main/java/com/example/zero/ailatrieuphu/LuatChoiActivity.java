@@ -67,43 +67,6 @@ public class LuatChoiActivity extends AppCompatActivity {
                 btnChuyenTiep.setText("Chuyển tiếp");
                 btnChoiLuon.setText("Chơi luôn");
                 txtNoiDung.setText("Và có 3 mốc quan trọng cần phải vượt qua, đó là 5, 10 và 15.");
-                if (GameSetting.amThanhHieuUng) {
-                    timer = new Timer();
-                    imagePosition = 0;
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    imagePosition++;
-                                    if (imagePosition == 1) {
-                                        txtCau05.setBackgroundResource(R.drawable.selected_option);
-                                        txtCau10.setBackgroundResource(0);
-                                        txtCau15.setBackgroundResource(0);
-                                    }
-                                    else if (imagePosition == 2) {
-                                        txtCau05.setBackgroundResource(0);
-                                        txtCau10.setBackgroundResource(R.drawable.selected_option);
-                                        txtCau15.setBackgroundResource(0);
-                                    }
-                                    else {
-                                        txtCau05.setBackgroundResource(0);
-                                        txtCau10.setBackgroundResource(0);
-                                        txtCau15.setBackgroundResource(R.drawable.selected_option);
-                                        imagePosition = 0;
-                                        timer.cancel();
-                                    }
-                                }
-                            });
-                        }
-                    }, 1800, 300);
-                }
-                else {
-                    txtCau05.setBackgroundResource(R.drawable.selected_option);
-                    txtCau10.setBackgroundResource(R.drawable.selected_option);
-                    txtCau15.setBackgroundResource(R.drawable.selected_option);
-                }
                 break;
             case 3:
                 txtCau05.setBackgroundResource(0);
@@ -115,29 +78,6 @@ public class LuatChoiActivity extends AppCompatActivity {
                 btnChuyenTiep.setText("Chuyển tiếp");
                 btnChoiLuon.setText("Chơi luôn");
                 txtNoiDung.setText("Bạn cũng như những người chơi khác đến với chúng tôi, có 3 sự trợ giúp, đó là 50 : 50, Gọi điện thoại cho người thân, hoặc Hỏi ý kiến khán giả trong trường quay.");
-                if (GameSetting.amThanhHieuUng) {
-                    animation = AnimationUtils.loadAnimation(LuatChoiActivity.this, R.anim.scale_button);
-                    timer = new Timer();
-                    imagePosition = 0;
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    imagePosition++;
-                                    if (imagePosition == 1) btn5050.startAnimation(animation);
-                                    else if (imagePosition == 2) btnGoiDien.startAnimation(animation);
-                                    else {
-                                        btnKhanGia.startAnimation(animation);
-                                        imagePosition = 0;
-                                        timer.cancel();
-                                    }
-                                }
-                            });
-                        }
-                    }, 3200, 1300);
-                }
                 break;
             case 4:
                 txtCau05.setBackgroundResource(0);
