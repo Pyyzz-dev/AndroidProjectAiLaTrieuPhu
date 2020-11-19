@@ -144,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void thucHienBatDauChoi(View view) {
         final SharedPreferences preferences = getSharedPreferences(CauHoiActivity.tenLuuTru, MODE_PRIVATE);
+        // lấy dữ liệu từ CauHoiActivity 918 - 922
         final int thuTuCauHoi = preferences.getInt("CAU_HOI", 0);
         if (thuTuCauHoi == 0) {
             Intent intent = new Intent(MainActivity.this, LuatChoiActivity.class);
