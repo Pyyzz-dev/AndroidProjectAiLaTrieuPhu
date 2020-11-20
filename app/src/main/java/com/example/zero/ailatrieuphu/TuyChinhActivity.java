@@ -64,7 +64,6 @@ public class TuyChinhActivity extends AppCompatActivity {
         editor.putBoolean("AM_THANH_NEN", amThanhNen);
         editor.putBoolean("AM_THANH_HIEU_UNG", amThanhHieuUng);
         editor.commit();
-
         super.onBackPressed();
     }
 

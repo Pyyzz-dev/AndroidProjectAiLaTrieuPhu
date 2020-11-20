@@ -625,51 +625,10 @@ public class CauHoiActivity extends AppCompatActivity {
         if (!btnDapAnC.isEnabled()) cacDapAnSaiKoTheLay.add('C');
         if (!btnDapAnD.isEnabled()) cacDapAnSaiKoTheLay.add('D');
         String[] dsTuVan = new String[3];
-        if (thuTuCauHoi <= 5) {
-            dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-        }
-        else if (thuTuCauHoi <= 10) {
-            if (random.nextInt(100) < 90) dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-            if (random.nextInt(100) < 90) dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-            if (random.nextInt(100) < 90) dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-        }
-        else {
-            if (random.nextInt(100) < 70) dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-            if (random.nextInt(100) < 70) dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-            if (random.nextInt(100) < 70) dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
-            else {
-                char dapAnSai = cacDapAn.get(random.nextInt(4));
-                while (cacDapAnSaiKoTheLay.contains(dapAnSai)) dapAnSai = cacDapAn.get(random.nextInt(4));
-                dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAnSai;
-            }
-        }
+        dsTuVan[0] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
+        dsTuVan[1] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
+        dsTuVan[2] = "Tôi xin tư vấn cho bạn, đáp án của tôi là " + dapAn;
+
         AlertDialog.Builder dialogTuVan = new AlertDialog.Builder(CauHoiActivity.this);
         dialogTuVan.setTitle("Kết quả tư vấn");
         dialogTuVan.setItems(dsTuVan, null);
@@ -828,7 +787,6 @@ public class CauHoiActivity extends AppCompatActivity {
                     }
                     else if (thuTuCauHoi == 15) {
                         playerTheme.stopPlayer();
-
                         playerSoundEffect.startPlayerWithOnCompleteListener(R.raw.question_15_final_answer, new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mediaPlayer) {
@@ -902,7 +860,6 @@ public class CauHoiActivity extends AppCompatActivity {
                         }
                     }
                     else {
-
                         isKetThuc = true;
                         int mocCauHoi;
                         playerTheme.stopPlayer();
@@ -1168,12 +1125,6 @@ public class CauHoiActivity extends AppCompatActivity {
         else if (thuTuCauHoi <= 10) playerTheme.startPlayerNonStop(R.raw.question_6_to_10);
         else if (thuTuCauHoi < 15) playerTheme.startPlayerNonStop(R.raw.question_11_to_14);
         else if (thuTuCauHoi == 15) playerTheme.startPlayerNonStop(R.raw.question_15);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
     }
 
     @Override
